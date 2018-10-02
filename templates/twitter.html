@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<title>MoodSeek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<link href='/static/styles/totalcss.css' rel='stylesheet' type='text/css'>
+ <style>
+ body{
+ background: url(https://subtlepatterns.com/patterns/scribble_light.png) #FFF;
+  font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+
+ }
+ img {
+     border: 1px solid #ddd;
+     border-radius: 4px;
+     padding: 5px;
+     width: 400px;
+     max-width: 100%;
+     height: 400px;
+     object-fit: contain;
+ }
+ h1 {
+     font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+
+ }
+ </style>
+<script type="text/javascript">
+
+//$('id02').on('show.bs.modal', function(e) {
+//  var id = (e.relatedTarget).data(id);
+//});
+/*
+  $(function(){
+
+      $('#confirm-delete').on('shown.bs.modal', function(e) {
+
+          var button = $(e.relatedTarget);
+
+          // this refers to Modal
+          console.log(button.data('id'))
+          $('input', this).val(button.data('id'));
+
+          //$('.url', this).html('Delete URL: <strong>' + button.data('href') + '</strong>');
+      });
+});
+*/
+
+</script>
+
+
+<body>
+
+<!-- Page Content -->
+<div class="w3-black ">
+
+  <h1>Let us find your mood!<span class="w3-blue" style="float:right; padding:0px 20px 0px 20px;">    MoodSeek     </span></h1>
+
+</h1>
+
+</div>
+<p> </p>
+
+
+  <div class="w3-bar w3-black">
+    <button class="w3-bar-item w3-button tablink w3-blue" id = 'btnfeed' onclick="openCity(event,'twitter')">Use your Twitter Handle</button>
+    <button class="w3-bar-item w3-button tablink w3-black" id = 'btncatalog' onclick="location.href = '/essay'">Upload a piece you've written</button>
+
+  </div>
+
+
+  <div id="twitter" class="w3-container w3-border city" style="display:block" font-family: "Roboto", sans-serif>
+
+
+  <form class="w3-container w3-center" method = 'POST' formaction="/tweets">
+    <br><br>
+    <p>
+<label style="float: left;">Twitter Handle</label>
+<input class="w3-input" type="text" name="twitter" value="" id="twitter" placeholder="Enter your Twitter handle here" title="Enter your Twitter handle here" required>
+</p>
+<br><br>
+<button class ="w3-button w3-black" onclick="parentNode.submit();" onclick="location:href ='/twitter'"> Find my emotion! </button>
+<br><br>
+  </form>
+  </div>
+
+
+
+
+
+
+<script>
+
+// Click on the "Jeans" link on page load to open the accordion for demo purposes
+//document.getElementById("btncatalog").click();
+
+
+// Script to open and close sidebar
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+function myFunction(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className =
+        x.previousElementSibling.className.replace("w3-gray", "w3-blue");
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+        x.previousElementSibling.className =
+        x.previousElementSibling.className.replace("w3-blue", "w3-gray");
+    }
+}
+
+function openRightMenu() {
+    document.getElementById("rightMenu").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("rightMenu").style.display = "none";
+}
+function req_close(num) {
+    document.getElementById("Request"+num).style.display = "none";
+}
+function openCity(evt, cityName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" w3-blue", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " w3-blue";
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<title>MoodSeek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<link href='/static/styles/totalcss.css' rel='stylesheet' type='text/css'>
+ <style>
+ body{
+ background: url(https://subtlepatterns.com/patterns/scribble_light.png) #FFF;
+   font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+
+ }
+ img {
+     border: 1px solid #ddd;
+     border-radius: 4px;
+     padding: 5px;
+     width: 400px;
+     max-width: 100%;
+     height: 400px;
+     object-fit: contain;
+ }
+ h1 {
+   font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+ }
+ </style>
+<script type="text/javascript">
+
+//$('id02').on('show.bs.modal', function(e) {
+//  var id = (e.relatedTarget).data(id);
+//});
+/*
+  $(function(){
+
+      $('#confirm-delete').on('shown.bs.modal', function(e) {
+
+          var button = $(e.relatedTarget);
+
+          // this refers to Modal
+          console.log(button.data('id'))
+          $('input', this).val(button.data('id'));
+
+          //$('.url', this).html('Delete URL: <strong>' + button.data('href') + '</strong>');
+      });
+});
+*/
+
+</script>
+
+
+<body>
+
+<!-- Page Content -->
+<div class="w3-black ">
+
+<h1>Let us find your mood!<span class="w3-blue" style="float:right; padding:0px 20px 0px 20px;">    MoodSeek     </span></h1>
+
+</div>
+<p> </p>
+
+
+  <div class="w3-bar w3-black">
+    <button class="w3-bar-item w3-button tablink w3-black" id = 'btncatalog' onclick="location.href = '/get-handle'">Use your Twitter Handle</button>
+    <button class="w3-bar-item w3-button tablink w3-blue" id = 'btnfeed' onclick="openCity(event,'essay')">Upload a Piece You've Written</button>
+
+  </div>
+
+
+  <div id="essay" class="w3-container w3-border city" style="display:block" font-family: "Roboto", sans-serif>
+
+
+  <form class="w3-container w3-center" method = 'POST' formaction="/essay">
+    <br><br>
+    <p>
+      
+      <label style="float: left;">Your name</label>
+<input class="w3-input" type="text" name="name" value="" id="name" placeholder="Enter your name" title="Enter your name" required>
+    </p>
+    <p>
+<label style="float: left;">Path to file with writing written by you</label>
+<input class="w3-input" type="text" name="essay" value="" id="essay" placeholder="Enter the path to the file" title="Enter the path to the file" required>
+</p>
+<br><br>
+<button class ="w3-button w3-black" onclick="parentNode.submit();" onclick="location:href ='/essay'"> Find my emotion! </button>
+<br><br>
+  </form>
+
+  </div>
+
+
+
+
+
+</body>
+</html>

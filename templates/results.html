@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<title>MoodSeek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<link href='/static/styles/totalcss.css' rel='stylesheet' type='text/css'>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js" integrity="sha384-THVO/sM0mFD9h7dfSndI6TS0PgAGavwKvB5hAxRRvc0o9cPLohB0wb/PTA7LdUHs" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+<script src="static/js/jspdf.js"></script>
+<script src="static/js/jspdf.plugin.from_html.js"></script>
+<script src="static/js/jspdf.plugin.addhtml.js"></script>
+ <style>
+ body{
+ background: url(https://subtlepatterns.com/patterns/scribble_light.png) #FFF;
+ font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+
+ }
+ img {
+    
+     padding: 5px;
+     max-height:230px;
+     object-fit: contain;
+
+ }
+ h1, h2, h3, h4, h5, h6 {
+   font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+ }
+
+ 
+
+
+ html, body {
+height: 98%;
+}
+
+header {
+    width: 100%;
+    height: 300px;
+     background-color: grey;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-top: auto;
+    width: 50%;
+    height: 50%;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+.recs {
+  padding: 10px 10px 10px 10px;
+}
+
+.block {
+    width: 50%;
+    height: 42.8%;
+    float: left;
+    padding: 0px 20px 20px 20px ;
+  }
+
+.texts {
+    width: 70%;
+    height: 90%;
+    float: right;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+tr:nth-child(odd) {background-color: #f2f2f2;}
+
+th {
+  width: 100%;
+  }
+
+
+
+* {box-sizing:border-box}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+
+/* Hide the images by default */
+/*
+.books, .movies, .images {
+    display: none;
+}
+*/
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+q {font-style: italic;}
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 300s;
+  animation-name: fade;
+  animation-duration: 300s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+ </style>
+
+
+<script type="text/javascript">
+
+
+
+  function replaceAll(str, find, replace) {
+    return str.replace(new RegExp(find, 'g'), replace);
+}
+        $("#btnPrint1").live("click", function () {
+            var divContents = replaceAll($("#dvContainer1").html(), 'none', 'block');
+            console.log(divContents);
+            var header = $("#header").html()
+            var printWindow = window.open('', '', 'height=400,width=800');
+            printWindow.document.write('<html><head><title>Song recommendations</title>');
+            //printWindow.document.write('<link rel="stylesheet" href="static/styles/printPDF.css" />'); 
+            printWindow.document.write('</head><body >');
+            printWindow.document.write(header);
+            printWindow.document.write(divContents);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+        });
+        $("#btnPrint2").live("click", function () {
+            var divContents = replaceAll($("#dvContainer2").html(), 'none', 'block');
+            console.log(divContents);
+            var header = $("#header").html()
+            var printWindow = window.open('', '', 'height=400,width=800');
+            printWindow.document.write('<html><head><title>Movie recommendations</title>');
+            //printWindow.document.write('<link rel="stylesheet" href="static/styles/printPDF.css" />'); 
+            printWindow.document.write('</head><body >');
+            printWindow.document.write(header);
+            printWindow.document.write(divContents);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+        });
+        $("#btnPrint3").live("click", function () {
+            var divContents = replaceAll($("#dvContainer3").html(), 'none', 'block');
+            console.log(divContents);
+            var header = $("#header").html()
+            var printWindow = window.open('', '', 'height=400,width=800');
+            printWindow.document.write('<html><head><title>Book recommendations</title>');
+            //printWindow.document.write('<link rel="stylesheet" href="static/styles/printPDF.css" />'); 
+            printWindow.document.write('</head><body >');
+            printWindow.document.write(header);
+            printWindow.document.write(divContents);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+        });
+        $("#btnPrint4").live("click", function () {
+            var divContents = replaceAll($("#dvContainer4").html(), 'none', 'block');
+            console.log(divContents);
+            var header = $("#header").html()
+            var printWindow = window.open('', '', 'height=400,width=800');
+            printWindow.document.write('<html><head><title>Image recommendations</title>');
+            //printWindow.document.write('<link rel="stylesheet" href="static/styles/printPDF.css" />'); 
+            printWindow.document.write('</head><body >');
+            printWindow.document.write(header);
+            printWindow.document.write(divContents);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+        });
+    </script>
+
+<script type="text/javascript">
+
+  $("#btn").click(function() {
+   $('input[type="radio"]:checked').val();
+});
+
+</script>
+
+<script type="text/javascript">
+  
+  $(document).ready(function() { 
+    showSlides(1, 0);
+    showSlides(1, 1);
+    showSlides(1, 2);
+
+  });
+</script>
+
+<script type="text/javascript">
+  function printPDF() {
+    var doc = new jsPDF();          
+var elementHandler = {
+  '#ignorePDF': function (element, renderer) {
+    return true;
+  }
+};
+var source = window.document.getElementsByTagName("body")[0];
+doc.fromHTML(
+    source,
+    15,
+    15,
+    {
+      'width': 180,'elementHandlers': elementHandler
+    });
+
+doc.output("dataurlnewwindow");
+  }
+</script>
+
+<script type="text/javascript">
+
+var slideIndex = [1,1,1];
+/* Class the members of each slideshow group with different CSS classes */
+var slideId = ["images", "books", "movies"] 
+
+
+function plusSlides(n, no) {
+  showSlides(slideIndex[no] += n, no);
+}
+
+function showSlides(n, no) {
+  var i;
+  var x = document.getElementsByClassName(slideId[no]);
+  if (n > x.length) {slideIndex[no] = 1} 
+  if (n < 1) {slideIndex[no] = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none"; 
+  }
+  x[slideIndex[no]-1].style.display = "block"; 
+}
+</script>
+
+
+<body>
+
+<!-- Page Content -->
+<div class="header">
+<div class="w3-black" id="header">  
+ <h1 style="text-align:left;font-weight:bold;">
+    {{name}} <p style="color: gray; display: inline">is</p> {{emotion}} <p style="color: gray; display: inline">!</p>
+  <span class="w3-blue" style="float:right; padding:0px 20px 0px 20px;">    MoodSeek     </span>
+
+</h1>
+
+</div>
+<p> </p>
+
+
+  <div class="w3-bar w3-black" id = "ignorePDF">
+      <h3><marquee style="height: 30px;">
+      {% for x in quote%}
+      {{x}}
+      <span style="display:inline-block; width: 500px;"></span>
+
+      {% endfor%}
+    </marquee></h3>
+    
+  </div>
+</div>
+
+<div class="block w3-gray">
+    
+    <h4 style="display: inline;">Here are some songs you may enjoy right now!</h4>      
+    <span style="display:inline-block; width: 30px;"></span>
+
+    <input style="padding: 5px 10px;" class="w3-black" type="button" id = "btnPrint1" value="Save these songs!">
+
+    <div id="dvContainer1" style="width: 100%;height: 79%;overflow-y: auto;overflow-x: auto;">
+      <table >
+        <col width="100%;">
+        {% for key, value, links in songs %}
+            
+            <tr>
+              <th>
+                
+                <h5 style="font-weight: bold;">{{value['Name']}}</h5> 
+                <h6>{{value['Artist']}} - {{value['Album']}} ({{value['Year']}})</h6>
+                <a href={{links}} id="forlink">Listen to song</a>
+
+              </th>
+              <th></th>
+              
+            </tr> 
+
+        {% endfor %}
+       
+
+      </table>
+    </div>
+  </div>
+
+    <div class="block" >
+
+      <h4 style="display: inline;">We think you may enjoy these movies now!</h4>
+      <span style="display:inline-block; width: 50px;"></span>
+
+      <input style="padding: 5px 10px;" class="w3-black" type="button" id = "btnPrint2" value="Save these movies!">
+
+      <div id="dvContainer2" class="slideshow-container" style="height: 79%;">
+        {% for key, values in movies.iterrows() %}
+        <div class="movies">
+        <img src = "{{values['Image']}}" style="float:left; max-height: 190px; padding-right: 20px; padding-left: 10px; padding-top: 10px;">
+
+        <div style="width: 75%;height: 100%;overflow-x: auto;float: right; padding-top: 30px; padding-right: 10px;">
+          <h3>{{values['Title']}}</h3>
+
+        <p style="padding-right: 30px;">{{values['Description']}}</p>
+      </div>
+    </div>
+        {% endfor %}
+        <a class="prev" onclick="plusSlides(-1, 2)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1, 2)">&#10095;</a>
+       </div> 
+
+     
+       <!--
+       <div style="text-align:center">
+          {% for key, value in images.iterrows() %}
+              <span class="dot" onclick="currentSlide({{loop.index}})"></span> 
+          {% endfor %}
+        </div>
+      -->
+    </div>
+    <div class="block" >
+      <br>
+      <h4 style="display: inline;">Some books that may interest you :</h4> 
+      <span style="display:inline-block; width: 100px;"></span>
+
+      <input style="padding: 5px 10px;" class="w3-black" type="button" id = "btnPrint3" value="Save these books!">
+
+      <div id="dvContainer3" class="slideshow-container" style="height: 79%; overflow-y:auto;">
+        {% for key, values in books.iterrows() %}
+
+        <div class="books">
+        <img src = "{{values['Image']}}" style="max-height: 190px; padding-right: 20px; padding-top: 20px;">
+
+        <div style="width: 70%;height: 100%;overflow-x: auto;float: right; padding-top: 30px; padding-right: 20px;">
+
+          <h3>{{values['Title']}}</h3>
+        
+        <q style="padding-right: 30px;">{{values['Author']}}</q>
+
+        <p style="padding-right: 30px;">{{values['Description']}}</p>
+      </div>
+
+    </div>
+        {% endfor %}
+        <a class="prev" onclick="plusSlides(-1, 1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1, 1)">&#10095;</a>
+       </div> 
+    </div>
+
+
+    <div class="block w3-gray" >
+      
+      <div  style="width: 30%;float: left; padding-top: 30px">
+      <h4>Too lazy for any of those? Just scroll through this image gallery then, with images chosen for you!</h4>
+      <input style="padding: 5px 10px" class="w3-black" type="button" id = "btnPrint4" value="Save these images!">
+    </div>
+       <div id="dvContainer4" class="slideshow-container" style="height: 50%; width: 65%; float: right; position: relative;">
+      {% for key, value in images.iterrows() %}
+              
+              <div class="images" style="vertical-align: middle;">
+              <img src="{{value['Filepath']}}" style="height: 100%;" class = "center">
+              
+            </div>
+      {% endfor %}
+
+      <a class="prev" style="top: 65%" onclick="plusSlides(-1, 0)">&#10094;</a>
+      <a class="next" style="top: 65%" onclick="plusSlides(1, 0)">&#10095;</a>
+      </div> 
+
+
+</div>
+
+ 
+</body>
+
+</html>
