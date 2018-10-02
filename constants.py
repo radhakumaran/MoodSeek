@@ -1,8 +1,3 @@
-
-
-
-
-
 class Constants:
         def __init__(self):
                 self.user_emotions = ['joy', 'fear', 'sadness', 'anger', 'analytical', 'confident', 'tentative']

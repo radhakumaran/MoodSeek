@@ -83,10 +83,7 @@ class song_data:
         print ('Loading dataset...')
         get_song_paths = glob.glob(self.const.song_dataset)
         for f in get_song_paths[:1000]:
-                #print (f)
-
                 songH5File = hdf5_getters.open_h5_file_read(f)
-                #print (type(songH5File))
                 self.update(songH5File)
                 songH5File.close()
         print ('No. of songs : ', len(self.id))
@@ -133,7 +130,6 @@ class Classification:
         """
         Reads the details of all songs in the dataset
         """
-        #print ('Reading song details...')
         self.details = pd.read_csv(self.input_path)
 
 

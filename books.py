@@ -23,13 +23,11 @@ def getBookDescription():
     r = requests.get(url)    
     bs = bs4.BeautifulSoup(r.text, features="lxml")
     for link in bs.findAll('a', attrs={'class': 'bookTitle'},  href=True):
-        #print(link["href"])
         url_list.append("https://www.goodreads.com/"+ link["href"])
 
     del url_list[93:]
     del url_list[9]
     del url_list[7]
-    #print(url_list)
     image_dir = const.books_image_dir
 
 
@@ -53,7 +51,6 @@ def getBookDescription():
             
             
             image = img.find('img', id='coverImage')
-            #image = movie.find('img', id='coverImage')
             print (image)
             save_dir = image_dir + "/" + title.replace(' ', '%20') + '_' + author.replace(' ', '%20')
             urllib.request.urlretrieve(image['src'], save_dir)
@@ -63,7 +60,6 @@ def getBookDescription():
             else :
                 description = description.get_text()
             print (description)
-            #print(title + ":" + description)
             list_df.append([title, author, description, save_dir])
     df = pd.DataFrame(list_df,columns=['Title','Author', 'Description', 'Image'])
     df.to_csv(const.book_dataset, encoding='utf-8')
@@ -83,12 +79,8 @@ def getTextSentiment(message_text):
     The sentiment polarity score of the text
     """
     sid = SentimentIntensityAnalyzer()
-    #print(message_text)
     scores = sid.polarity_scores(message_text)
-    '''
-    for key in sorted(scores):
-            print('{0}: {1}, '.format(key, scores[key]))
-    '''
+
     return scores
 
 def Clustering():
@@ -105,11 +97,9 @@ def Clustering():
     kmeans.fit(X)
     y_kmeans = kmeans.predict(X)
     centers = kmeans.cluster_centers_
-    #print(centers)
     list_emotions=const.user_emotions
     list_pred_emotions=[]
     centers_sorted=sorted(centers,key=lambda l:l[0])
-    #print(centers_sorted)
     for value in y_kmeans:
         list_pred_emotions.append(list_emotions[value])
     df["Emotion"]=list_pred_emotions
@@ -130,10 +120,17 @@ def books_classify():
 
 def get_books(emotion):
     """
-    Returns books that match a particular emotion
+    Returns a set of books for a given emotion.
+
+    Args:
+
+    emotion: The emotion for which you want books to be fetched.
+
+    Returns:
+
+    The set of books for the particular emotion
     """
     df = pd.read_csv(const.clustered_books)
-    #print (df.groupby('Emotion').count())
     df = df.loc[df.Emotion == emotion]
     return df.sample(const.book_num)
 

@@ -33,6 +33,14 @@ def get_name (screen_name):
 	return user._json['name']
 	
 def get_all_tweets(screen_name):
+	"""
+	Extracts the user's tweets
+
+	Args:
+
+	screen_name: the user's twitter handle
+       
+	"""
 	print ()
 	print ('Extracting tweets...')
 	#authorize twitter, initialize tweepy
@@ -47,55 +55,26 @@ def get_all_tweets(screen_name):
 	while True:
 		tweets = api.user_timeline(screen_name = screen_name,count=count)
 
-		'''
-		print(json.dumps(tweets[0]._json["text"]))
-		print (len(tweets))
-		'''
+		
 		for tweet in tweets:
 			if (datetime.datetime.now() - tweet.created_at).days > 1: #1= No. of days
-				'''
-				print(datetime.datetime.now())
-				print(tweet.created_at)
-				print((datetime.datetime.now() - tweet.created_at))
-				'''
+				
 				alltweets.extend(tweets)
 				alltweets. pop()
 				deadend = True
 				break
 		if deadend:
-			#alltweets.extend(tweets)
 			break
 		if not deadend:
 		    count+=1
 		    
-		    #time.sleep(500)
 		
 
 	       
-	#make initial request for most recent tweets (200 is the maximum allowed count)
-	#new_tweets = api.user_timeline(screen_name = screen_name,count=50)
-	
-	#save most recent tweets
-	#alltweets.extend(new_tweets)
 	
 	#save the id of the oldest tweet less one
 	oldest = alltweets[-1].id - 1
-	#print(len(alltweets))
-	#keep grabbing tweets until there are no tweets left to grab
-	'''while len(alltweets) > 0:
-		print ("getting tweets before %s" % (oldest))
 		
-		#all subsiquent requests use the max_id param to prevent duplicates
-		new_tweets = api.user_timeline(screen_name = screen_name,count=200,max_id=oldest)
-		
-		#save most recent tweets
-		alltweets.extend(new_tweets)
-		
-		#update the id of the oldest tweet less one
-		oldest = alltweets[-1].id - 1
-		
-		print ("...%s tweets downloaded so far" % (len(alltweets)))'''
-	
 	#transform the tweepy tweets into a 2D array that will populate the csv	
 	outtweets = [[tweet.id_str, tweet.created_at, tweet.text.encode("utf-8")] for tweet in alltweets]
 	
@@ -104,11 +83,21 @@ def get_all_tweets(screen_name):
 		writer = csv.writer(f)
 		writer.writerow(["id","created_at","text"])
 		writer.writerows(outtweets)
-	
-	pass
+
 
 
 def get_twitter_emotion(screen_name):
+	"""
+	Identifies the user's emotion based on their Twitter presence
+
+	Args:
+
+	screen_name: the user's Twitter handle
+
+	Returns:
+
+	The user's emotion as identified
+	"""
 	get_all_tweets(screen_name)
 
 	print ()
@@ -121,11 +110,7 @@ def get_twitter_emotion(screen_name):
 	    version='2017-09-21')
 	
 	tweet_df = pd.read_csv(const.tweets_raw % screen_name)
-	'''
-	tweets = json.dumps({'text':re.sub('\\\\x..', '',r''.join([x[2:-1] for x in tweet_df.text]) )})
-	print ('tweets')
-	print (tweets)
-	'''
+
 	fh = open(const.tweets_json, "w")
 	fh.write(json.dumps({'text':re.sub('\\\\x..', '',r'.'.join([x[2:-1] for x in tweet_df.text]) )}))
 	fh.close()
@@ -149,20 +134,26 @@ def get_twitter_emotion(screen_name):
 		
 
 
-def read_data(filename):
-	file = open(filename, "r")
-	text = file.read()
-	return text
-
-
 def get_essay_emotion(path):
-	text = read_data(path)
+	"""
+	Identifies the user's mood based on a piece of writing authored by them
+
+	Args:
+
+	path: path to the file with text written by the user
+
+	Returns:
+
+	The user's emotion as identified
+	"""
+	file = open(path, "r")
+	text = file.read()
 	print ()
 	print ('Identifying mood...')
 	service = ToneAnalyzerV3(username=const.watson_username,password=const.watson_password,version='2017-09-21')
 	service.set_detailed_response(True)
 	tone_input = ToneInput(text)
-        
+	
 	tone = service.tone(tone_input=tone_input, content_type = "application/json")
 
 	emo_score=[]

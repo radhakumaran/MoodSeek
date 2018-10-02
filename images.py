@@ -78,7 +78,7 @@ def ImageDatasetProcessing():
 
 def get_images(emotion):
     """
-    Returns a set of emotions for a given emotion.
+    Returns a set of images for a given emotion.
 
     Args:
 

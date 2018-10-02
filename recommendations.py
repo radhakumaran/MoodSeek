@@ -16,7 +16,7 @@ class Recommendations:
 
         def initialise_recommendations(self):
                 """
-                
+                Drives the classification of all the datasets being used
                 """
                 print ()
                 print ('Initialising recommendations...')
@@ -30,6 +30,12 @@ class Recommendations:
 
         def get_recommendations(self, emotion, choice):
                 """
+                Retrieves recommendations for the user based on their emotion
+
+                Args:
+
+                emotion: the user's emotion/mood
+                choice: whether the user wants calming(0) or relatable(1) recommendations
                 """
                 print ()
                 print ('Getting recommendations...')

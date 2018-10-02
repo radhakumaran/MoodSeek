@@ -60,13 +60,10 @@ def getTextSentiment(message_text):
 
     The sentiment polarity score of the text
     """
+    
     sid = SentimentIntensityAnalyzer()
-    #print(message_text)
     scores = sid.polarity_scores(message_text)
-    '''
-    for key in sorted(scores):
-            print('{0}: {1}, '.format(key, scores[key]))
-    '''
+
     return scores
 
 def Clustering():
@@ -84,11 +81,9 @@ def Clustering():
     kmeans.fit(X)
     y_kmeans = kmeans.predict(X)
     centers = kmeans.cluster_centers_
-    #print(centers)
     list_emotions=['anger', 'fear', 'sadness','tentative', 'analytical','confident','joy']
     list_pred_emotions=[]
     centers_sorted=sorted(centers,key=lambda l:l[0])
-    #print(centers_sorted)
     for value in y_kmeans:
         list_pred_emotions.append(list_emotions[value])
     df["Emotion"]=list_pred_emotions
@@ -106,14 +101,20 @@ def movies_classify():
 
 
 def get_movies(emotion):
+    """
+    Returns a set of movies for a given emotion.
+
+    Args:
+
+    emotion: The emotion for which you want movies to be fetched.
+
+    Returns:
+
+    The set of movies for the particular emotion
+    """
     df = pd.read_csv(const.clustered_movies)
-    '''
-    print (df.groupby('Emotion').count())
-    print (df.Emotion.unique())
-    print (emotion)
-    '''
+
     df = df.loc[df['Emotion'] == emotion]
     print (len(df))
-    #print (df.sample(const.movie_num))
     return df.sample(const.movie_num)
     
