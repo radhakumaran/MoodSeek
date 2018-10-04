@@ -14,11 +14,16 @@ This project is an entry to the #IBMHackChallenge and the relevant documentation
 * __II-MoodSeek-presentation__ : A short presentation on the entry.
 
 * __III-MoodSeek-video_recording__ : A demonstration of the working of the app, followed by USPs and the design process of the system.
-Timestamps : 
-...... 0:00 - Introduction
-...... 0:35 - Demonstration
-...... 4:48 - Key Value Propositions and USPs
-...... 8:19 - Design of the system
+
+      Timestamps : 
+  
+         0:00 - Introduction
+         
+         0:35 - Demonstration
+
+         4:48 - Key Value Propositions and USPs
+
+         8:19 - Design of the system
 
 * __IV-MoodSeek-key_value_proposition__ : Key Value Proposition/innovations being proposed and developed on top of the given problem statement that create uniqueness in the solution.
 
@@ -49,4 +54,5 @@ Timestamps :
 The music dataset was derived from the Million Song Dataset (https://labrosa.ee.columbia.edu/millionsong/).
 
 All image credits to the rightful owners.
+
 
