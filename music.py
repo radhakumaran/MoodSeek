@@ -3,120 +3,24 @@
 
 import pandas as pd
 import numpy as np
-import h5py
 import os
-import glob
 import copy
-import hdf5_getters
 import re
 import urllib.request
 import json
 import sklearn.metrics
-import matplotlib.pyplot as plt
 from constants import Constants
 from textblob import TextBlob
 from sklearn.metrics import silhouette_score
 
-const = Constants()
-class song_data:
-    def __init__(self):
-        self.id = []
-        self.songCount = 0
-        self.title = []
-        self.artist = []
-        self.album = []
-        self.year = []
-        self.tempo = []
-        self.energy = []
-        self.key = []
-        self.pitch = []
-        self.mfcc = []
-        self.mode = []
-        self.song_details = None
-        self.const = Constants()
-        self.file_path = self.const.song_dataset
-        self.output_path = self.const.song_details
-        
-    def update(self, songH5File):
-        """
-        Updates details for a particular song, and adds them to the existing list
-        Args:
-
-        songH5File: the hdf5 file for a song
-        """
-        
-        if '\\x' in str(hdf5_getters.get_title(songH5File))[2:-1]:
-            return
-        self.id.append(str(hdf5_getters.get_song_id(songH5File))[2:-1])
-        self.songCount += 1
-        self.title.append(str(hdf5_getters.get_title(songH5File))[2:-1])
-        self.artist.append(str(hdf5_getters.get_artist_name(songH5File))[2:-1])
-        self.album.append(str(hdf5_getters.get_release(songH5File))[2:-1])
-        self.year.append(str(hdf5_getters.get_year(songH5File)))
-        self.tempo.append(str(hdf5_getters.get_tempo(songH5File)))
-        self.energy.append(str(hdf5_getters.get_energy(songH5File)))
-        self.key.append(str(hdf5_getters.get_key(songH5File)))
-        self.pitch.append(hdf5_getters.get_segments_pitches(songH5File).mean(axis = 0).argmax(axis = 0))
-        self.mfcc.append(hdf5_getters.get_segments_timbre(songH5File).mean(axis = 0).argmax(axis = 0))
-        self.mode.append(hdf5_getters.get_mode(songH5File))
-        
-
-    def set_paths(self):
-        """
-        Stores the paths to music information files
-        """
-        print ('Setting paths...')
-        # If file does not exits, create it
-        if not os.path.exists(self.const.song_list_path):
-
-            # List all paths of songs and save them to 
-            get_song_paths = glob.glob(self.const.song_dataset)
-            with open(self.const.song_list_path,'w') as f:
-                f.writelines('\n'.join(p for p in get_song_paths))
-                f.close()
-
-
-    def load_data(self):
-        """
-        loads and updates details of all songs in the dataset
-        """
-        print ('Loading dataset...')
-        get_song_paths = glob.glob(self.const.song_dataset)
-        for f in get_song_paths[:1000]:
-                songH5File = hdf5_getters.open_h5_file_read(f)
-                self.update(songH5File)
-                songH5File.close()
-        print ('No. of songs : ', len(self.id))
-    
-    def write_csv(self):
-        """
-        writes the processed details to a CSV file
-        """
-        print ('Writing to CSV...')
-        self.song_details = pd.DataFrame({'ID':self.id, 'Name':self.title, 'Artist':self.artist, 'Album':self.album, 'Year':self.year, 'Tempo':self.tempo, 'Energy':self.energy, 'Key':self.key, 'Pitch':self.pitch, 'MFCC':self.mfcc, 'Mode':self.mode})
-        self.song_details.to_csv(self.output_path, index = False)    
-            
-            
-    def driver_function(self):
-        """
-        driver function for the song_data class
-        """
-        if not os.path.exists(self.output_path):
-            print ('Extracting song details...')
-            self.set_paths()
-            self.load_data()
-            self.write_csv()
-            print ('Written to CSV.')
-
-    
+const = Constants()  
 
 
 class Classification:
     def __init__(self):
 
         self.const = Constants()
-        self.songs_data = song_data()
-        self.input_path = self.const.song_details
+        self.input_path = self.const.song_dataset
         self.feature_path = self.const.feature_path
         self.output_path =self.const.clustered_music
         self.api_key = self.const.musixmatch_api_key
@@ -305,9 +209,7 @@ def music_classify():
     """
     Classifies the music dataset
     """
-    song = song_data()
     classification = Classification()
-    song.driver_function()
     classification.driver_function()
 
 def get_songs(emotion):

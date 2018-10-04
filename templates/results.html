@@ -211,6 +211,8 @@ q {font-style: italic;}
         });
         $("#btnPrint2").live("click", function () {
             var divContents = replaceAll($("#dvContainer2").html(), 'none', 'block');
+            divContents = replaceAll(divContents, '<a class="prev" onclick="plusSlides(-1, 1)">&#10094;</a>', '');
+            divContents = replaceAll(divContents, '<a class="next" onclick="plusSlides(1, 2)">&#10095;</a>', '')
             console.log(divContents);
             var header = $("#header").html()
             var printWindow = window.open('', '', 'height=400,width=800');
@@ -225,6 +227,8 @@ q {font-style: italic;}
         });
         $("#btnPrint3").live("click", function () {
             var divContents = replaceAll($("#dvContainer3").html(), 'none', 'block');
+            divContents = replaceAll(divContents, '<a class="prev" onclick="plusSlides(-1, 1)">&#10094;</a>', '');
+            divContents = replaceAll(divContents, '<a class="next" onclick="plusSlides(1, 2)">&#10095;</a>', '')
             console.log(divContents);
             var header = $("#header").html()
             var printWindow = window.open('', '', 'height=400,width=800');
@@ -239,6 +243,8 @@ q {font-style: italic;}
         });
         $("#btnPrint4").live("click", function () {
             var divContents = replaceAll($("#dvContainer4").html(), 'none', 'block');
+            divContents = replaceAll(divContents, '<a class="prev" onclick="plusSlides(-1, 1)">&#10094;</a>', '');
+            divContents = replaceAll(divContents, '<a class="next" onclick="plusSlides(1, 2)">&#10095;</a>', '')
             console.log(divContents);
             var header = $("#header").html()
             var printWindow = window.open('', '', 'height=400,width=800');

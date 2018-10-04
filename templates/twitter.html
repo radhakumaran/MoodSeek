@@ -30,29 +30,6 @@
 
  }
  </style>
-<script type="text/javascript">
-
-//$('id02').on('show.bs.modal', function(e) {
-//  var id = (e.relatedTarget).data(id);
-//});
-/*
-  $(function(){
-
-      $('#confirm-delete').on('shown.bs.modal', function(e) {
-
-          var button = $(e.relatedTarget);
-
-          // this refers to Modal
-          console.log(button.data('id'))
-          $('input', this).val(button.data('id'));
-
-          //$('.url', this).html('Delete URL: <strong>' + button.data('href') + '</strong>');
-      });
-});
-*/
-
-</script>
-
 
 <body>
 
@@ -88,66 +65,6 @@
 <br><br>
   </form>
   </div>
-
-
-
-
-
-
-<script>
-
-// Click on the "Jeans" link on page load to open the accordion for demo purposes
-//document.getElementById("btncatalog").click();
-
-
-// Script to open and close sidebar
-function w3_open() {
-    document.getElementById("mySidebar").style.display = "block";
-    document.getElementById("myOverlay").style.display = "block";
-}
-
-function w3_close() {
-    document.getElementById("mySidebar").style.display = "none";
-    document.getElementById("myOverlay").style.display = "none";
-}
-
-function myFunction(id) {
-    var x = document.getElementById(id);
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-        x.previousElementSibling.className =
-        x.previousElementSibling.className.replace("w3-gray", "w3-blue");
-    } else {
-        x.className = x.className.replace(" w3-show", "");
-        x.previousElementSibling.className =
-        x.previousElementSibling.className.replace("w3-blue", "w3-gray");
-    }
-}
-
-function openRightMenu() {
-    document.getElementById("rightMenu").style.display = "block";
-}
-function w3_close() {
-    document.getElementById("rightMenu").style.display = "none";
-}
-function req_close(num) {
-    document.getElementById("Request"+num).style.display = "none";
-}
-function openCity(evt, cityName) {
-  var i, x, tablinks;
-  x = document.getElementsByClassName("city");
-  for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < x.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" w3-blue", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " w3-blue";
-}
-
-</script>
 
 </body>
 </html>

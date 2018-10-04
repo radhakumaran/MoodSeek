@@ -8,8 +8,8 @@ from constants import Constants
 from recommendations import Recommendations
 from twitter import get_twitter_emotion, get_essay_emotion, get_name
 
-
-
+import py_compile
+py_compile.compile('constants.py')
 
 const = Constants()
 

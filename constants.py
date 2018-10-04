@@ -26,9 +26,7 @@ class Constants:
                 self.tweets_json = 'data/twitter/tweets.json'
 
                 
-                self.song_dataset = 'data/music/MillionSongSubset/data/*/*/*/*.h5'
-                self.song_list_path = 'data/music/MillionSongSubset/list_hdf5_files.txt'
-                self.song_details = 'data/music/songDetails.csv'
+                self.song_dataset = 'data/music/songDetails.csv'
                 self.feature_path = 'data/music/features.csv'
                 self.clustered_music = 'data/music/clustered_music.csv'
                 self.music_emotion_mapping = {'soothe':{'joy':'happy', 'fear':'hopeful', 'sadness':'hopeful', 'anger':'contemplative', 'analytical':'contemplative', 'confident':'happy', 'tentative':'happy'}, 'relatable':{'joy':'happy', 'fear':'afraid', 'sadness':'sad', 'anger':'angry', 'analytical':'contemplative', 'confident':'happy', 'tentative':'discontent'}}

@@ -8,35 +8,39 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <link href='/static/styles/totalcss.css' rel='stylesheet' type='text/css'>
- <style>
- body{
- background: url(https://subtlepatterns.com/patterns/scribble_light.png) #FFF;
- font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+
+<style>
+     body{
+           background: url(https://subtlepatterns.com/patterns/scribble_light.png) #FFF;
+           font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
 
 
- }
- img {
-     border: 1px solid #ddd;
-     border-radius: 4px;
-     padding: 5px;
-     width: 400px;
-     max-width: 100%;
-     height: 400px;
-     object-fit: contain;
- }
-h1 {
-  font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
-}
-
- </style>
+     }
+     img {
+           border: 1px solid #ddd;
+           border-radius: 4px;
+           padding: 5px;
+           width: 400px;
+           max-width: 100%;
+           height: 400px;
+           object-fit: contain;
+     }
+    h1 {
+            font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+    }
+</style>
 <style type="text/css"> 
+
    input[type="radio"]{margin: 0 100px};} 
+
 </style>
 <script type="text/javascript">
 
-  $("#btn").click(function() {
-   $('input[type="radio"]:checked').val();
-});
+      $("#btn").click(function() {
+
+          $('input[type="radio"]:checked').val();
+
+      });
 
 </script>
 
@@ -45,27 +49,33 @@ h1 {
 
 <!-- Page Content -->
 
-<div class="w3-black" id="header">  
- <h1 style="text-align:left;font-weight:bold;">
-    {{name}} <p style="color: gray; display: inline">is</p> {{emotion}} <p style="color: gray; display: inline">!</p>
-  <span class="w3-blue" style="float:right; padding:0px 20px 0px 20px;">    MoodSeek     </span>
+    <div class="w3-black" id="header">  
+      <h1 style="text-align:left;font-weight:bold;">
+          
+          {{name}} <p style="color: gray; display: inline">is</p> {{emotion}} <p style="color: gray; display: inline">!</p>
+        
+          <span class="w3-blue" style="float:right; padding:0px 20px 0px 20px;">    MoodSeek     </span>
 
-</h1>
+      </h1>
 
-</div>
+    </div>
 
-  <form class="w3-container w3-center" method = 'POST' formaction="/choice">
 
-  <div id="results" class="w3-container w3-border city" style="display:block" >
- 
- <img src="/static/images/cheermeup.jpeg" alt="Cheer me up" style="width:550px;height:450px;border:50px solid black;">
-<img src="/static/images/hitme.jpg" alt="Cheer me up" style="width:550px;height:450px;border:50px solid black;"> <br><br>
-  <form class="w3-container w3-center" method = 'POST' formaction="/choice">
-    <input type = "radio" name = "choice" value = '0' checked><label style="font-size: 25px;">Cheer me up</label>
-    <input type = "radio" name = "choice" value = '1'><label style="font-size: 25px;">Hit me with something relatable</label><br>
-    <button class ="w3-button w3-black" style="float: right;" onclick="parentNode.submit();" onclick="location:href ='/choice'"> Go ahead!</button>
-  </form>
-</div>
+    <div id="results" class="w3-container w3-border city" style="display:block" >
+     
+        <img src="/static/images/cheermeup.jpeg" alt="Cheer me up" style="width:550px;height:450px;border:50px solid black;">
+        
+        <img src="/static/images/hitme.jpg" alt="Cheer me up" style="width:550px;height:450px;border:50px solid black;"> <br><br>
+          
+        <form class="w3-container w3-center" method = 'POST' formaction="/choice">
+            
+            <input type = "radio" name = "choice" value = '0' checked><label style="font-size: 25px;">Cheer me up</label>
+            <input type = "radio" name = "choice" value = '1'><label style="font-size: 25px;">Hit me with something relatable</label><br>
+            <button class ="w3-button w3-black" style="float: right;" onclick="parentNode.submit();" onclick="location:href ='/choice'"> Go ahead!</button>
+            
+        </form>
+    </div>
+
 
 </body>
 </html>
