@@ -53,6 +53,8 @@ This project is an entry to the #IBMHackChallenge and the relevant documentation
 
 The music dataset was derived from the Million Song Dataset (https://labrosa.ee.columbia.edu/millionsong/).
 
+The twitter extraction module was derived from https://github.com/alexmille/twitter-data-extractor.
+
 All image credits to the rightful owners.
 
 
